@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PatternCodding Vcard Portfolio</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="{% static 'assets/images/landing-logo.ico' %}" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="{% static './assets/css/style.css' %}">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="{{ sideprofile.picture.url }}" alt="Patterson" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Patterson">{{ sideprofile.name_text }}</h1>
+
+          <p class="title">{{ sideprofile.carreer_text }}</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:patterncodding@gmail.com" class="contact-link">{{ sideprofile.email_text }}</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+12133522795" class="contact-link">{{ sideprofile.number_text }}</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Birthday</p>
+
+              <time datetime="1982-06-23">{{ sideprofile.birth_text }}</time>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>{{ sideprofile.location_text }}</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+        {% for nav in navbar %}
+          <li class="navbar-item">
+            <button class="navbar-link  active" data-nav-link>{{ nav.navbar }}</button>
+            
+            {% endfor %}
+          
+          </li>
+
+        </ul>
+
+      </nav>
+
+
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about  active" data-page="about">
+
+        <header>
+            <h2 class="mine" style="color: hsl(45, 100%, 71%);">Welcome To @ <br><h2>
+            <h2 style="color: hsl(45, 100%, 71%);">{{ request.user }}:<br><h2>
+            {% for edits in edit %}
+          <h2 class="h2 article-title">{{ edits.about_heading }}<h2>
+        </header>
+
+        <section class="about-text">
+          <p>{{ edits.text_1 }}</p>
+
+          <p>{{ edits.text_2 }}</p>
+          {% endfor %}
+        </section>
+
+
+        <!--
+          - service
+        -->
+
+        <section class="service">
+             
+                
+          <h3 class="h3 service-title">Who are mine?</h3>
+          
+          <ul class="service-list">
+            {% for duties in duty %}
+            <li class="service-item">
+                
+              <div class="service-icon-box">
+               
+                <img src="{{ duties.duty_img.url }}" alt="Duty_Image" width="260">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">{{ duties.duty_text }}</h4>
+
+                <p class="service-item-text">{{ duties.duty_description }}</p>
+
+  
+              </div>
+            </li>
+            {% endfor %}
+
+          </ul>
+
+        </section>
+       
+
+        <!--
+          - testimonials
+        -->
+
+        <section class="testimonials">
+
+          <h3 class="h3 testimonials-title">Testimonials</h3>
+          
+          <ul class="testimonials-list has-scrollbar">
+            {% for testimonial in testimonials %}
+            <li class="testimonials-item">
+              
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="{{ testimonial.testimony_image.url }}" alt="Daniel lewis" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>{{ testimonial.testimoial_name }}</h4>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>{{ testimonial.testimony_text }}</p>
+                </div>
+
+              </div>
+              
+            </li>
+            
+            {% endfor %}
+          </ul>
+          
+
+        </section>
+
+
+        <!--
+          - testimonials modal
+        -->
+        {% for testimonial in testimonials %}
+        <div class="modal-container" data-modal-container>
+          
+          <div class="overlay" data-overlay></div>
+          
+          <section class="testimonials-modal">
+
+            <button class="modal-close-btn" data-modal-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+           
+            <div class="modal-img-wrapper">
+              <figure class="modal-avatar-box">
+                <img src="{{ testimonial.testimony_image.url }}" alt="Daniel lewis" width="80" data-modal-img>
+              </figure>
+
+              <img src="{% static './assets/images/icon-quote.svg' %}" alt="quote icon">
+            </div>
+
+            <div class="modal-content">
+
+              <h4 class="h3 modal-title" data-modal-title>{{ testimonial.testimoial_name }}</h4>
+
+              <time datetime="2022-11-25">{{ testimonial.testimoial_date }}</time>
+
+              <div data-modal-text>
+                <p>
+                  {{ testimonial.testimony_text }}</p>
+              </div>
+              
+            </div>
+           
+          </section>
+          
+        </div>
+        {% endfor %}
+
+        <!--
+          - clients
+        -->
+
+        <section class="clients">
+      
+          <h3 class="h3 clients-title">Clients</h3>
+                    
+          <ul class="clients-list has-scrollbar">
+            {% for clients in client %}
+            <li class="clients-item">
+              <a href="#">
+                <img src="{{ clients.client_image.url }}" alt="client logo">
+              </a>
+            </li>
+            {% endfor %}
+           
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Education</h3>
+          </div>
+            
+            
+          <ol class="timeline-list">
+            {% for educations in education %}
+               
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">{{ educations.school }}</h4>
+              
+              <span>{{ educations.educ_date }}</span>
+             
+              <p class="timeline-text">{{ educations.edu_description }}</p>
+
+            </li>
+            {% endfor %}
+           
+
+        </section>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Experience</h3>
+          </div>
+
+          <ol class="timeline-list">
+            {% for experiences in experience %}
+              
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">{{ experiences.experience_name }}</h4>
+
+              <span>{{ experiences.exp_year }}</span>
+
+              <p class="timeline-text">{{ experiences.exp_description }}</p>
+
+            </li>
+            {% endfor %}
+
+          </ol>
+
+        </section>
+
+        <section class="skill">
+
+          <h3 class="h3 skills-title">My skills</h3>
+
+          <ul class="skills-list content-card">
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Web design</h5>
+                <data value="80">60%</data>
+              </div>
+             
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 80%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Data scientist</h5>
+                <data value="70">70%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 70%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5">Busines analysis</h5>
+                <data value="90">90%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 90%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <!-- <div class="title-wrapper">
+                <h5 class="h5">WordPress</h5>
+                <data value="50">50%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 50%;"></div>
+              </div>
+
+            </li> -->
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <!-- <ul class="filter-list">
+
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web design</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Data Science</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web development</button>
+            </li>
+
+          </ul> -->
+
+          <div class="filter-select-box">
+
+            <button class="filter-select" data-select>
+
+              <div class="select-value" data-selecct-value>Select category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+
+            </button>
+<!-- 
+            <ul class="select-list">
+
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web design</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Data Science</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web development</button>
+              </li>
+
+            </ul> -->
+
+          </div>
+
+          <ul class="project-list">
+            {% for ports in port %}
+              
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="{{ ports.portolio_img.url }}" alt="uploaded-image" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">{{ ports.portolio_name }}</h3>
+                
+                <p class="project-category">{{ ports.portolio_desc }}</p>
+                <p class="project-category">Uploaded on: {{ ports.uploaded }}</p>
+              </a>
+            </li>
+            {% endfor %}
+
+
+<!-- 
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="{% static './assets/images/project-2.png' %}" alt="orizon" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Orizon</h3>
+
+                <p class="project-category">Web development</p>
+                
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="{% static './assets/images/project-3.jpg' %}" alt="fundo" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Fundo</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="Data Science">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="{% static './assets/images/project-4.png' %}" alt="brawlhalla" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Brawlhalla</h3>
+
+                <p class="project-category">Data Science</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="{% static './assets/images/project-5.png' %}" alt="dsm." loading="lazy">
+                </figure>
+
+                <h3 class="project-title">DSM.</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web design">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="{% static './assets/images/project-6.png' %}" alt="metaspark" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">MetaSpark</h3>
+
+                <p class="project-category">Web design</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="{% static './assets/images/project-7.png' %}" alt="summary" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Summary</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="Data Science">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="{% static './assets/images/project-8.jpg' %}" alt="task manager" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Task Manager</h3>
+
+                <p class="project-category">Data Science</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="{% static './assets/images/project-9.png' %}" alt="arrival" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Arrival</h3>
+
+                <p class="project-category">Web development</p>
+
+              </a>
+            </li> -->
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #BLOG
+      -->
+
+      <article class="blog" data-page="blog">
+       
+        <header>
+          <h2 class="h2 article-title">Blog</h2>
+         
+        </header>
+        
+         
+        <section class="blog-posts">
+          
+
+          <ul class="blog-posts-list">
+            {% for blogs in blog %}
+            <li class="blog-post-item">
+              <a href="#">
+
+                <figure class="blog-banner-box">
+                  <img src="{{ blogs.blog_img.url }}" alt="Design conferences in 2022" loading="lazy">
+                </figure>
+                
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Posted On: </p>
+                    
+                    <span class="dot"></span>
+
+                    <time datetime="2022-02-23">{{ blogs.blog_date }}</time>
+                  </div>
+                  <div class="blog-meta">
+                    <p class="blog-category">By: </p>
+                    
+                    <span class="dot"></span>
+
+                    <time datetime="2022-02-23">{{ request.user }}</time>
+                  </div>
+                 
+                  <h3 class="h3 blog-item-title">{{ blogs.blog_description }}</h3>
+
+                  <p class="blog-text">
+                    {{ blogs.blog_contents|safe }}
+                  </p>
+
+                </div>
+                 
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #CONTACT
+      -->
+
+      <article class="contact" data-page="contact">
+
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+    
+        <section class="mapbox" data-mapbox>
+
+            <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.108099234268!2d8.02594481409366!3d6.380045626586075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105b5967c27e9dd5%3A0x50be9c3b55f6345e!2sEmmanuel%20lodge!5e0!3m2!1sen!2sng!4v1669692696738!5m2!1sen!2sng" 
+            width="600" height="450" style="border:0;">
+                
+            </iframe>
+        </section>
+
+        <section class="contact-form">
+
+          <h3 class="h3 form-title">Contact Form</h3>
+
+          <form action="" method='POST' class="form" data-form>
+                {% csrf_token %}
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+
+              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+            </div>
+
+            <textarea name="messages" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+
+            <button class="form-btn" type="submit" disabled data-form-btn>
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+
+          </form>
+
+        </section>
+
+      </article>
+
+    </div>
+
+  </main>
+
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="{% static './assets/js/script.js' %}"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
